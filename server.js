@@ -7,6 +7,7 @@ var apiai = require('apiai');
 var app = apiai("e925d19e5368410babf3cf3b663b9996");
 var unixTime = require('unix-time');
 var config = require('./config');
+var getForexResult = require('./getForexResult');
 var request;
 var isMatch = false;
 var matchedData = null;
@@ -60,16 +61,22 @@ rl.on('line', function (msg) {
         request.on('response', function (response) {
             var event = config.event;
             var speech = response.result.fulfillment.speech;
+            var intentName = response.result.metadata.intentName;
 
             Object.keys(event).forEach(function (key) {
                 var data = event[key];
-                if (data.texts.indexOf(speech) > -1) {
+                const isExists = data.texts.indexOf(speech) > -1;
+                if (isExists) {
                     isMatch = true;
                     matchedData = data;
                 }
             });
 
             console_out(getChatName + " : " + response.result.fulfillment.speech);
+
+            if (intentName === 'forex-input' && speech.includes('Converting')) {
+                getForexResult(speech, console_out, getChatName);
+            }
         });
 
         request.on('error', function (error) {

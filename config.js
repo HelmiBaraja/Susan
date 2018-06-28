@@ -3,6 +3,7 @@ var checkPassword = require('./checkPassword');
 var inputTransferAmount = require('./inputTransferAmount');
 var printTransferProof = require('./printTransferProof');
 var checkTransferAccountNo = require('./checkTransferAccountNo');
+var checkCurrentRate = require('./checkCurrentRate');
 
 var config = {
     event: {

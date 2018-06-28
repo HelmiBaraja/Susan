@@ -11,6 +11,7 @@
   "dependencies": {
     "ansi-color": "^0.2.1",
     "apiai": "^4.0.2",
+    "request": "^2.87.0",
     "sleep": "^5.1.1",
     "unix-time": "^1.0.1"
   }
