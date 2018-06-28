@@ -1,4 +1,4 @@
-var checkBalance = require('./checkBalance');
+var printBalance = require('./printBalance');
 var checkPassword = require('./checkPassword');
 
 var config = {
@@ -10,7 +10,7 @@ var config = {
         },
         printBalance: {
             texts: [],
-            func: checkBalance,
+            func: printBalance,
             hasNext: null
         }
     }
