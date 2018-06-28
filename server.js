@@ -38,6 +38,14 @@ function console_out (msg) {
     rl.prompt(true);
 }
 
+var data = {
+    transfer: {
+        accountNo: '',
+        accountName: '',
+        amount: 0
+    }
+};
+
 rl.on('line', function (msg) {
     if (msg === '') {
         bill_reply('Please do not type empty words, dear :)');
@@ -70,8 +78,14 @@ rl.on('line', function (msg) {
 
         request.end();
     } else {
-        matchedData.func(getChatName, console_out);
+        if (!data[matchedData.dataType]) {
+            matchedData.func(getChatName, console_out);
+        } else {
+            data[matchedData.dataType] = matchedData.func(getChatName, console_out, msg, data[matchedData.dataType]);
+        }
+
         isMatch = !!matchedData.hasNext;
+
         if (isMatch) {
             matchedData = config.event[matchedData.hasNext];
         }
