@@ -1,5 +1,5 @@
 function getPrintText (data) {
-    return 'Congrats! You have successfully transferred to ' + data.accountName + ' for ' + data.amount + ' :)';
+    return 'Congrats! You have successfully transferred to ' + data.accountNo + ' by ' + data.amount + ' :)';
 }
 
 function printTransferProof (getChatName, console_out, amount, data) {

@@ -1,30 +1,10 @@
-var printBalance = require('./printBalance');
-var checkPassword = require('./checkPassword');
 var inputTransferAmount = require('./inputTransferAmount');
 var printTransferProof = require('./printTransferProof');
-var checkTransferAccountNo = require('./checkTransferAccountNo');
-var checkCurrentRate = require('./checkCurrentRate');
 
 var config = {
     event: {
-        checkBalance: {
-            texts: ['Please input your account no', 'Type your account number'],
-            func: checkPassword,
-            hasNext: 'printBalance'
-        },
-        printBalance: {
-            texts: [],
-            func: printBalance,
-            hasNext: null
-        },
         checkTransferAccountName: {
-            texts: ['Can u give me the account name you want to transfer?', 'Please type the account name you want to transfer, dear :)'],
-            func: checkTransferAccountNo,
-            hasNext: 'inputTransferAmount',
-            dataType: 'transfer'
-        },
-        inputTransferAmount: {
-            texts: [],
+            texts: ['Can u give me the account no you want to transfer?', 'Please type the account number you want to transfer, dear :)'],
             func: inputTransferAmount,
             hasNext: 'printTransferProof',
             dataType: 'transfer'

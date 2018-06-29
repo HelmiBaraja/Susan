@@ -29,7 +29,7 @@ bill_reply("..");
 sleep.sleep(1)
 bill_reply("...");
 sleep.sleep(4)
-bill_reply("Yes dear, How can I help you now ?");
+bill_reply("For now, you have to login first. Please type your username");
 // console.log("<You>");
 
 function console_out (msg) {
@@ -44,12 +44,47 @@ var data = {
         accountNo: '',
         accountName: '',
         amount: 0
+    },
+    auth: {
+        isUsernameTyped: true,
+        isPasswordTyped: false,
+        isLogin: false
     }
 };
 
 rl.on('line', function (msg) {
     if (msg === '') {
         bill_reply('Please do not type empty words, dear :)');
+        return;
+    }
+
+    if (data.auth.isUsernameTyped && !data.auth.isPasswordTyped && msg !== 'admin' && !data.auth.isLogin) {
+        bill_reply('Username is wrong, dear :) Please type your username again');
+        data.auth.isUsernameTyped = true;
+        return;
+    }
+
+    if (!data.auth.isUsernameTyped && !data.auth.isLogin) {
+        bill_reply('You have to login first, dear :) Please type your username');
+        data.auth.isUsernameTyped = true;
+        return;
+    }
+
+    if (!data.auth.isPasswordTyped && !data.auth.isLogin) {
+        bill_reply('Please type your password too');
+        data.auth.isPasswordTyped = true;
+        return;
+    }
+
+    if (data.auth.isPasswordTyped && msg !== 'admin' && !data.auth.isLogin) {
+        bill_reply('Password is wrong, dear :) Please type your password again');
+        data.auth.isPasswordTyped = true;
+        return;
+    }
+
+    if (data.auth.isUsernameTyped && data.auth.isPasswordTyped && !data.auth.isLogin) {
+        bill_reply("Yes dear, How can I help you now ? You can ask me about your balance, transaction history, fund transfer, and current rate");
+        data.auth.isLogin = true;
         return;
     }
 
@@ -76,6 +111,14 @@ rl.on('line', function (msg) {
 
             if (intentName === 'forex-input' && speech.includes('Converting')) {
                 getForexResult(speech, console_out, getChatName);
+            }
+
+            if (intentName === 'logout') {
+                data.auth = {
+                    isUsernameTyped: false,
+                    isPasswordTyped: false,
+                    isLogin: false
+                };
             }
         });
 
