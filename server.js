@@ -12,6 +12,9 @@ const app = express();
 app.use(express.static(__dirname + '/UI_InputUser/views'));
 app.use(express.static(__dirname + '/UI_InputUser/public'));
 
+//app.use(express.static(__dirname + '/UI_SusanTalk/views'));
+//app.use(express.static(__dirname + '/UI_SusanTalk/public'));
+
 const server = app.listen(process.env.PORT || 5000, () => {
     console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
 });
@@ -140,5 +143,11 @@ io.on('connection', function (socket) {
 
     socket.on('getLoginStatus', () => {
         socket.emit('loginStatus', data.auth.isLogin);
+    });
+
+    /* BYPASS Without Login*/
+    socket.on('bypasslogin', () => {
+        data.auth.isLogin = true;
+        socket.emit('bypass', data.auth.isLogin);
     });
 });
