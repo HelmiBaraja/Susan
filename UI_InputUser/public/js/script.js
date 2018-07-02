@@ -62,24 +62,7 @@ const socket = io();
             return $messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
         };
 
-        setTimeout(function () {
-            getBotMessage('Waking Up...');
-        }, 0);
-        setTimeout(function () {
-            getBotMessage('Hi, my name is Susan. Could you wait please dear, let me put some makeup :)');
-        }, 3000);
-        setTimeout(function () {
-            getBotMessage('.');
-        }, 4000);
-        setTimeout(function () {
-            getBotMessage('..');
-        }, 5000);
-        setTimeout(function () {
-            getBotMessage('...');
-        }, 6000);
-        setTimeout(function () {
-            getBotMessage('For now, you have to login first. Please type your username');
-        }, 7000);
+        socket.emit('getLoginStatus');
 
         $('.send_message').click(function (e) {
             socket.emit('chat message', getMessageText());
@@ -100,5 +83,34 @@ const socket = io();
                 getBotMessage(replyText["text"]);
             }
         });
+
+        socket.on('loginStatus', function (isLogin) {
+            if (isLogin) {
+                setTimeout(function () {
+                    getBotMessage('Welcome back dear, You can ask me about your balance, transaction history, fund transfer, and current rate');
+                }, 0);
+
+                return;
+            }
+
+            setTimeout(function () {
+                getBotMessage('Waking Up...');
+            }, 0);
+            setTimeout(function () {
+                getBotMessage('Hi, my name is Susan. Could you wait please dear, let me put some makeup :)');
+            }, 3000);
+            setTimeout(function () {
+                getBotMessage('.');
+            }, 4000);
+            setTimeout(function () {
+                getBotMessage('..');
+            }, 5000);
+            setTimeout(function () {
+                getBotMessage('...');
+            }, 6000);
+            setTimeout(function () {
+                getBotMessage('For now, you have to login first. Please type your username');
+            }, 7000);
+        })
     });
 }.call(this));
