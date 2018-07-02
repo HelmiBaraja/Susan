@@ -90,7 +90,7 @@ rl.on('line', function (msg) {
 
     if (!isMatch) {
         request = app.textRequest(msg, {
-            sessionId: unixTime(new Date()) + ''
+            sessionId: 'apisusan'
         });
 
         request.on('response', function (response) {
