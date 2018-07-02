@@ -1,6 +1,6 @@
 const request = require('request');
 
-function getForexResult (msg, console_out, getChatName) {
+function getForexResult (msg, sendMessage) {
     const messages = msg.split(' ');
     const amount = messages[1];
     const base = messages[2];
@@ -15,7 +15,7 @@ function getForexResult (msg, console_out, getChatName) {
             targetVal = data.rates[target];
             result = parseFloat(amount * (targetVal / baseVal)).toFixed(2);
 
-            console_out(getChatName + " : " + amount + " " + base + " is equals " + result + " " + target);
+            sendMessage(amount + " " + base + " is equals " + result + " " + target);
         });
 }
 

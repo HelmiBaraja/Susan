@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,10 @@
     "apiai": "^4.0.2",
     "request": "^2.87.0",
     "sleep": "^5.1.1",
-    "unix-time": "^1.0.1"
+    "unix-time": "^1.0.1",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "socketio": "^1.0.0"
   }
 }

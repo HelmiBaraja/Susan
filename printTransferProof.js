@@ -2,10 +2,9 @@ function getPrintText (data) {
     return 'Congrats! You have successfully transferred to ' + data.accountNo + ' by ' + data.amount + ' :)';
 }
 
-function printTransferProof (getChatName, console_out, amount, data) {
+function printTransferProof (sendMessage, amount, data) {
     data.amount = amount;
-    var text = getPrintText(data);
-    console_out(getChatName + " : " + getPrintText(data));
+    sendMessage(getPrintText(data));
     data = {
         accountNo: '',
         accountName: '',
